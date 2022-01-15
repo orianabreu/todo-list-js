@@ -16,10 +16,34 @@ addBtn.addEventListener("click", (e) => {
     const p = document.createElement("p");
     p.textContent = text;
 
+    //li.classList.add('esta-es-una-clase');
+
     li.appendChild(p);
+    li.appendChild(addDeleteBtn()); // hoisting
     ul.appendChild(li);
 
     input.value = "";
     empty.style.display = "none";
   }
 });
+
+function addDeleteBtn() {
+  const deleteBtn = document.createElement("button");
+
+  deleteBtn.textContent = "X";
+  deleteBtn.className = "btn-delete";
+
+  deleteBtn.addEventListener("click", (e) => {
+    const item = e.target.parentElement;
+    // item.remove();
+    ul.removeChild(item);
+
+    const items = document.querySelectorAll("li");
+
+    if (items.length === 0) {
+      empty.style.display = "block";
+    }
+  });
+
+  return deleteBtn;
+}
